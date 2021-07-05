@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="banner">
+                <div class="banner-text">
+                    <h4>TO DO TASK</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <h4>ADD TASK</h4>
+           <form method="post" class="3-3 shadow">
+    {% csrf_token %}
+  <div class="form-group">
+      <label>Taskname : </label>
+      <input type="text" placeholder="Enter Taskname" name="name" size="15" class="form-control"><br>
+  </div>
+  <div class="form-group">
+      <label>Priority: </label>
+      <input type="text" placeholder="pririty" name="priority" size="15" class="form-control"><br>
+  </div>
+               <div class="form-group">
+      <label>Date: </label>
+      <input type="date" placeholder="date" name="date" size="15" class="form-control"><br>
+  </div>
+  <center><button type="submit" class="btn btn-primary">Submit</button></center>
+
+           </form>
+        </div>
+
+    <div class="col-md-6">
+        <h4>TASK COMPLETED</h4>
+        {% for i in obj1 %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{i.name}}</h5>
+                <p><b>{{i.priority}}</b></p>
+                <p><b>{{i.date}}</b></p>
+
+                  <a class="btn btn-danger" href="{% url 'cbvdelete' i.id %}">DELETE</a>
+                <a class="btn btn-success" href="{% url 'cbvupdate' i.id %}">UPDATE</a>
+
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+</div>
+    </div>
+{% endblock %}
